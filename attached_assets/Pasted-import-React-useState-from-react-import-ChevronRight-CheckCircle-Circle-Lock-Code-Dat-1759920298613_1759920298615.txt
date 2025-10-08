@@ -1,0 +1,339 @@
+import React, { useState } from 'react';
+import { ChevronRight, CheckCircle, Circle, Lock, Code, Database, Server, Cloud, Shield, Rocket, Zap, Layers } from 'lucide-react';
+
+const FullStackRoadmap = () => {
+  const [completedNodes, setCompletedNodes] = useState(new Set());
+  const [expandedPhases, setExpandedPhases] = useState(new Set(['phase1']));
+
+  const roadmapData = [
+    {
+      id: 'phase1',
+      title: 'Foundation',
+      icon: Code,
+      color: 'from-blue-500 to-cyan-500',
+      duration: '3 months',
+      children: [
+        { id: '1-1', title: 'HTML5 & Semantic Tags', items: ['Forms', 'Canvas/SVG', 'Accessibility'] },
+        { id: '1-2', title: 'CSS3 & Layouts', items: ['Flexbox', 'Grid', 'Animations', 'Responsive Design'] },
+        { id: '1-3', title: 'JavaScript ES6+', items: ['DOM', 'Promises/Async', 'Closures', 'Event Loop'] },
+        { id: '1-4', title: 'CSS Frameworks', items: ['Tailwind CSS', 'Bootstrap', 'Sass/SCSS'] }
+      ]
+    },
+    {
+      id: 'phase2',
+      title: 'Frontend Frameworks',
+      icon: Layers,
+      color: 'from-purple-500 to-pink-500',
+      duration: '3 months',
+      requires: ['phase1'],
+      children: [
+        { id: '2-1', title: 'React.js', items: ['Hooks', 'Context API', 'React Router', 'Custom Hooks'] },
+        { id: '2-2', title: 'Next.js', items: ['SSR/SSG', 'App Router', 'API Routes', 'Server Components'] },
+        { id: '2-3', title: 'State Management', items: ['Redux Toolkit', 'Zustand', 'React Query'] },
+        { id: '2-4', title: 'TypeScript', items: ['Types', 'Interfaces', 'Generics', 'Utility Types'] }
+      ]
+    },
+    {
+      id: 'phase3',
+      title: 'Backend Development',
+      icon: Server,
+      color: 'from-green-500 to-emerald-500',
+      duration: '4 months',
+      requires: ['phase2'],
+      children: [
+        { id: '3-1', title: 'Node.js & Express', items: ['Middleware', 'Routing', 'Error Handling', 'File Upload'] },
+        { id: '3-2', title: 'Go (Golang)', items: ['Gin Framework', 'Goroutines', 'Channels', 'GORM'] },
+        { id: '3-3', title: 'Python Backend', items: ['FastAPI', 'Django', 'Flask', 'SQLAlchemy'] },
+        { id: '3-4', title: 'Alternative Frameworks', items: ['Nest.js', 'Fastify', 'AdonisJS'] }
+      ]
+    },
+    {
+      id: 'phase4',
+      title: 'Databases',
+      icon: Database,
+      color: 'from-orange-500 to-red-500',
+      duration: '3 months',
+      requires: ['phase3'],
+      children: [
+        { id: '4-1', title: 'SQL Databases', items: ['PostgreSQL', 'MySQL', 'Indexes', 'Transactions'] },
+        { id: '4-2', title: 'NoSQL Databases', items: ['MongoDB', 'Redis', 'Cassandra', 'Neo4j'] },
+        { id: '4-3', title: 'ORMs', items: ['Prisma', 'TypeORM', 'Drizzle', 'Sequelize'] },
+        { id: '4-4', title: 'Cloud Databases', items: ['Firebase', 'Supabase', 'PlanetScale', 'Neon'] }
+      ]
+    },
+    {
+      id: 'phase5',
+      title: 'API Development',
+      icon: Zap,
+      color: 'from-yellow-500 to-amber-500',
+      duration: '3 months',
+      requires: ['phase4'],
+      children: [
+        { id: '5-1', title: 'REST API', items: ['HTTP Methods', 'Status Codes', 'Versioning', 'Pagination'] },
+        { id: '5-2', title: 'GraphQL', items: ['Queries', 'Mutations', 'Apollo', 'Subscriptions'] },
+        { id: '5-3', title: 'Real-time', items: ['WebSockets', 'Socket.io', 'SSE', 'tRPC'] },
+        { id: '5-4', title: 'API Tools', items: ['Postman', 'Swagger/OpenAPI', 'Insomnia'] }
+      ]
+    },
+    {
+      id: 'phase6',
+      title: 'Auth & Security',
+      icon: Shield,
+      color: 'from-indigo-500 to-purple-500',
+      duration: '2 months',
+      requires: ['phase5'],
+      children: [
+        { id: '6-1', title: 'Authentication', items: ['JWT', 'OAuth 2.0', 'Sessions', '2FA'] },
+        { id: '6-2', title: 'Auth Services', items: ['Auth0', 'Clerk', 'NextAuth', 'Supabase Auth'] },
+        { id: '6-3', title: 'Security', items: ['HTTPS', 'CORS', 'XSS', 'CSRF', 'SQL Injection'] },
+        { id: '6-4', title: 'Encryption', items: ['Hashing (bcrypt)', 'AES', 'RSA', 'JWT Signing'] }
+      ]
+    },
+    {
+      id: 'phase7',
+      title: 'DevOps & Cloud',
+      icon: Cloud,
+      color: 'from-sky-500 to-blue-500',
+      duration: '3 months',
+      requires: ['phase6'],
+      children: [
+        { id: '7-1', title: 'Version Control', items: ['Git', 'GitHub', 'Git Flow', 'Pull Requests'] },
+        { id: '7-2', title: 'Docker', items: ['Containers', 'Dockerfile', 'Docker Compose', 'Images'] },
+        { id: '7-3', title: 'CI/CD', items: ['GitHub Actions', 'GitLab CI', 'Jenkins', 'CircleCI'] },
+        { id: '7-4', title: 'Cloud Platforms', items: ['AWS', 'Vercel', 'Railway', 'Netlify', 'Azure'] }
+      ]
+    },
+    {
+      id: 'phase8',
+      title: 'Testing',
+      icon: CheckCircle,
+      color: 'from-teal-500 to-green-500',
+      duration: '2 months',
+      requires: ['phase7'],
+      children: [
+        { id: '8-1', title: 'Frontend Testing', items: ['Jest', 'Vitest', 'React Testing Library'] },
+        { id: '8-2', title: 'E2E Testing', items: ['Playwright', 'Cypress', 'Puppeteer'] },
+        { id: '8-3', title: 'Backend Testing', items: ['Supertest', 'Mocha', 'Chai'] },
+        { id: '8-4', title: 'Test Strategies', items: ['Unit Tests', 'Integration', 'TDD', 'Coverage'] }
+      ]
+    },
+    {
+      id: 'phase9',
+      title: 'Advanced Topics',
+      icon: Rocket,
+      color: 'from-pink-500 to-rose-500',
+      duration: '3 months',
+      requires: ['phase8'],
+      children: [
+        { id: '9-1', title: 'Microservices', items: ['Service Architecture', 'API Gateway', 'gRPC'] },
+        { id: '9-2', title: 'Message Queues', items: ['RabbitMQ', 'Kafka', 'Redis Pub/Sub'] },
+        { id: '9-3', title: 'Performance', items: ['Caching', 'CDN', 'Code Splitting', 'Lazy Loading'] },
+        { id: '9-4', title: 'Advanced', items: ['PWA', 'WebAssembly', 'Kubernetes', 'Monitoring'] }
+      ]
+    }
+  ];
+
+  const toggleNode = (nodeId) => {
+    setCompletedNodes(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(nodeId)) {
+        newSet.delete(nodeId);
+      } else {
+        newSet.add(nodeId);
+      }
+      return newSet;
+    });
+  };
+
+  const togglePhase = (phaseId) => {
+    setExpandedPhases(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(phaseId)) {
+        newSet.delete(phaseId);
+      } else {
+        newSet.add(phaseId);
+      }
+      return newSet;
+    });
+  };
+
+  const isPhaseUnlocked = (phase) => {
+    if (!phase.requires) return true;
+    return phase.requires.every(reqId => {
+      const reqPhase = roadmapData.find(p => p.id === reqId);
+      return reqPhase?.children.every(child => completedNodes.has(child.id));
+    });
+  };
+
+  const getPhaseProgress = (phase) => {
+    const total = phase.children.length;
+    const completed = phase.children.filter(child => completedNodes.has(child.id)).length;
+    return { completed, total, percentage: Math.round((completed / total) * 100) };
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16 relative">
+          <div className="absolute inset-0 flex items-center justify-center opacity-10">
+            <Code className="w-64 h-64" />
+          </div>
+          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent relative z-10">
+            Full Stack Developer Roadmap
+          </h1>
+          <p className="text-xl text-gray-300 relative z-10">Your interactive journey from zero to hero 🚀</p>
+          <div className="mt-6 flex gap-4 justify-center items-center relative z-10">
+            <div className="bg-white/10 backdrop-blur-lg px-6 py-3 rounded-full border border-white/20">
+              <span className="text-sm">
+                {completedNodes.size} / {roadmapData.reduce((acc, phase) => acc + phase.children.length, 0)} completed
+              </span>
+            </div>
+            <div className="bg-white/10 backdrop-blur-lg px-6 py-3 rounded-full border border-white/20">
+              <span className="text-sm">~30 months total</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Roadmap Tree */}
+        <div className="space-y-8">
+          {roadmapData.map((phase, phaseIndex) => {
+            const isUnlocked = isPhaseUnlocked(phase);
+            const progress = getPhaseProgress(phase);
+            const isExpanded = expandedPhases.has(phase.id);
+            const Icon = phase.icon;
+
+            return (
+              <div key={phase.id} className="relative">
+                {/* Connection Line */}
+                {phaseIndex > 0 && (
+                  <div className="absolute left-8 -top-8 w-0.5 h-8 bg-gradient-to-b from-transparent via-purple-500 to-transparent" />
+                )}
+
+                {/* Phase Card */}
+                <div className={`relative ${!isUnlocked ? 'opacity-50' : ''}`}>
+                  <div
+                    onClick={() => isUnlocked && togglePhase(phase.id)}
+                    className={`bg-gradient-to-r ${phase.color} p-1 rounded-2xl shadow-2xl cursor-pointer transform transition-all duration-300 hover:scale-105 ${
+                      isExpanded ? 'shadow-purple-500/50' : ''
+                    }`}
+                  >
+                    <div className="bg-slate-800/90 backdrop-blur-lg rounded-2xl p-6">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                          <div className={`p-3 rounded-xl bg-gradient-to-r ${phase.color}`}>
+                            {isUnlocked ? <Icon className="w-8 h-8" /> : <Lock className="w-8 h-8" />}
+                          </div>
+                          <div>
+                            <h2 className="text-2xl font-bold">{phase.title}</h2>
+                            <p className="text-sm text-gray-400">{phase.duration}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <div className="text-right">
+                            <div className="text-sm text-gray-400">Progress</div>
+                            <div className="text-2xl font-bold">{progress.percentage}%</div>
+                            <div className="text-xs text-gray-500">
+                              {progress.completed}/{progress.total}
+                            </div>
+                          </div>
+                          <ChevronRight
+                            className={`w-6 h-6 transition-transform duration-300 ${
+                              isExpanded ? 'rotate-90' : ''
+                            }`}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Progress Bar */}
+                      <div className="mt-4 h-2 bg-gray-700 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full bg-gradient-to-r ${phase.color} transition-all duration-500`}
+                          style={{ width: `${progress.percentage}%` }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Children Nodes */}
+                  {isExpanded && isUnlocked && (
+                    <div className="mt-6 ml-12 space-y-4">
+                      {phase.children.map((child, childIndex) => {
+                        const isCompleted = completedNodes.has(child.id);
+                        return (
+                          <div key={child.id} className="relative">
+                            {/* Connection Line to Parent */}
+                            <div className="absolute -left-12 top-6 w-12 h-0.5 bg-gradient-to-r from-purple-500 to-transparent" />
+
+                            {/* Child Node */}
+                            <div
+                              onClick={() => toggleNode(child.id)}
+                              className={`group bg-slate-800/50 backdrop-blur-sm border-2 rounded-xl p-4 cursor-pointer transition-all duration-300 hover:bg-slate-700/50 hover:scale-105 ${
+                                isCompleted
+                                  ? 'border-green-500 shadow-lg shadow-green-500/20'
+                                  : 'border-slate-700 hover:border-purple-500'
+                              }`}
+                            >
+                              <div className="flex items-start gap-4">
+                                <div className="pt-1">
+                                  {isCompleted ? (
+                                    <CheckCircle className="w-6 h-6 text-green-500" />
+                                  ) : (
+                                    <Circle className="w-6 h-6 text-gray-500 group-hover:text-purple-400" />
+                                  )}
+                                </div>
+                                <div className="flex-1">
+                                  <h3 className="text-lg font-semibold mb-2">{child.title}</h3>
+                                  <div className="flex flex-wrap gap-2">
+                                    {child.items.map((item, i) => (
+                                      <span
+                                        key={i}
+                                        className={`text-xs px-3 py-1 rounded-full transition-colors ${
+                                          isCompleted
+                                            ? 'bg-green-500/20 text-green-300 border border-green-500/30'
+                                            : 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
+                                        }`}
+                                      >
+                                        {item}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Footer Stats */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-lg rounded-xl p-6 border border-blue-500/30">
+            <h3 className="text-sm text-gray-400 mb-2">Phases Completed</h3>
+            <p className="text-3xl font-bold">
+              {roadmapData.filter(p => getPhaseProgress(p).percentage === 100).length} / {roadmapData.length}
+            </p>
+          </div>
+          <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl p-6 border border-purple-500/30">
+            <h3 className="text-sm text-gray-400 mb-2">Skills Mastered</h3>
+            <p className="text-3xl font-bold">{completedNodes.size}</p>
+          </div>
+          <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-lg rounded-xl p-6 border border-green-500/30">
+            <h3 className="text-sm text-gray-400 mb-2">Next Unlock</h3>
+            <p className="text-xl font-bold">
+              {roadmapData.find(p => !isPhaseUnlocked(p))?.title || 'All Unlocked! 🎉'}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FullStackRoadmap;

@@ -1,3 +1,5 @@
+<img width="1578" height="948" alt="Screenshot from 2025-10-08 16-56-11" src="https://github.com/user-attachments/assets/f03a6ac2-4c50-434b-807b-9bc4dc8a7418" />
+
 # 🚀 Complete Full Stack Development Roadmap
 
 ## Phase 1: Foundation (Months 1-3)

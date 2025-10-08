@@ -12,6 +12,20 @@
     🚀 Click to Open the Tracker
   </a>
 </p>
+<p align="center">
+  <a href="https://github.com/dev-adalz/full-stack-roadmap/wiki" target="_blank" style="
+    background-color:#0ea5e9;
+    color:white;
+    padding:12px 24px;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:600;
+    font-family:sans-serif;
+    ">
+    📚 Click to Open Wiki
+  </a>
+</p>
+
 
 # 🚀 Complete Full Stack Development Roadmap
 

@@ -13,7 +13,7 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://github.com/dev-adalz/full-stack-roadmap/wiki" target="_blank" style="
+  <a href="README.md" target="_blank" style="
     background-color:#0ea5e9;
     color:white;
     padding:12px 24px;
